@@ -1,1 +1,1 @@
-{"allocations": {"VTI": 50, "SOXX": 25, "BND": 10, "BNDX": 2, "VNQ": 6, "VXUS": 5, "GLD": 2}, "frequency": 30, "name": "", "period": "days"}
+{"allocations": {"VTI": 50, "SOXX": 25, "BND": 10, "BNDX": 2, "VNQ": 6, "VXUS": 5, "GLD": 2}, "frequency": 30, "name": "Core + Semiconductor", "period": "days"}
