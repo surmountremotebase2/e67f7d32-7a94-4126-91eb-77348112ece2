@@ -32,7 +32,7 @@ class TradingStrategy(Strategy):
 
     def is_oversold(self, ticker, data):
         rsi = RSI(ticker, data, 14)
-        return rsi[-1] <= 30
+        return rsi[-1] <= 45
 
     def is_overbought(self, ticker, data):
         rsi = RSI(ticker, data, 14)
