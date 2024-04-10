@@ -43,7 +43,7 @@ class TradingStrategy(Strategy):
                 allocation_dict[i] = 1
 
             if not self.above_moving_averages(i, d) and self.is_overbought(i, d):
-                allocation_dict[i] = 0
+                allocation_dict[i] = 0.5
 
         # for i in self.tickers:
         #     current_price = d[-1][i]["close"]
