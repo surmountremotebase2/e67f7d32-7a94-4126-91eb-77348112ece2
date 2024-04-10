@@ -21,12 +21,7 @@ class TradingStrategy(Strategy):
             current_price = d[-1][i]["close"]
             this_sma = SMA(i, d, 50)
             this_rsi = RSI(i, d, 14)
-            if current_price > this_sma[-1]:
+            if current_price > this_sma[-1] and this_rsi[-1] <= 30:
                 allocation_dict[i] = 1
-
-        # self.count += 1
-        # if (self.count % 30 == 1):
-        #     allocation_dict = {self.tickers[i]: self.weights[i]/sum(self.weights) for i in range(len(self.tickers))}
-        #     return TargetAllocation(allocation_dict)
 
         return TargetAllocation(allocation_dict)
