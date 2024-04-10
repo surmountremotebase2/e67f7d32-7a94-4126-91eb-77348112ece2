@@ -59,7 +59,7 @@ class TradingStrategy(Strategy):
         levels using RSI as metric
         '''
         rsi = RSI(ticker, data, 14)
-        return rsi[-1] <= 35
+        return rsi[-1] <= 50
 
     def is_overbought(self, ticker, data):
         '''
