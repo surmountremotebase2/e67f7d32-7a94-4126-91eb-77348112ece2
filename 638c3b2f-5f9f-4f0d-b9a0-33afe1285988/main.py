@@ -20,8 +20,7 @@ class TradingStrategy(Strategy):
         for i in self.tickers:
             current_price = d[-1][i]["close"]
             this_sma = SMA(i, d, 50)
-            this_rsi = RSI(i, d, 14)
-            if current_price > this_sma[-1] and this_rsi[-1] <= 30:
+            if (current_price > this_sma[-1]) and (this_sma[-1] > this_sma[-2]):
                 allocation_dict[i] = 1
 
         return TargetAllocation(allocation_dict)
