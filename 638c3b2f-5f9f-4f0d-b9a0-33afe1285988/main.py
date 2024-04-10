@@ -70,7 +70,8 @@ class TradingStrategy(Strategy):
                self.above_moving_averages(i, d):
                 allocation_dict[i] = 1
 
-            if self.below_moving_averages(i, d):
+            if self.below_moving_averages(i, d) and
+               self.has_decelerated(i, d):
                 allocation_dict[i] = 0
 
         # for i in self.tickers:
