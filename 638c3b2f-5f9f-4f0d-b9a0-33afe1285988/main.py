@@ -21,12 +21,21 @@ class TradingStrategy(Strategy):
         '''
         return data[-1][ticker]["close"] > data[-2][ticker]["close"] > data[-3][ticker]["close"]
 
+    def above_moving_averages(self, ticker, data):
+        '''
+        check if the price is currently above the 50 and 100
+        day moving average
+        '''
+        50d_sma = SMA(ticker, data, 50)
+        100d_sma = SMA(ticker, data, 100)
+        return data[-1][ticker]["close"] > 50d_sma[-1] > 100d_sma[-1]
+
     def run(self, data):
         d = data["ohlcv"]
         allocation_dict = {}
 
         for i in self.tickers:
-            if self.has_momentum(i, d):
+            if self.has_momentum(i, d) and self.above_moving_averages(i, d):
                 log("MOMENTUM!")
 
         # for i in self.tickers:
