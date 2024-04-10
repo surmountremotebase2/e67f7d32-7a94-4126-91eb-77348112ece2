@@ -24,4 +24,4 @@ class TradingStrategy(Strategy):
             if current_price > this_sma[-1]:
                 log("trade!")
 
-        return None
+        return TargetAllocation({})
