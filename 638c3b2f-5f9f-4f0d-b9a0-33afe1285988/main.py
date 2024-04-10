@@ -71,7 +71,7 @@ class TradingStrategy(Strategy):
                 allocation_dict[i] = 1
 
             if self.is_overbought(i, d) and \
-               self.has_decelerated(i, d) and \
+               #self.has_decelerated(i, d) and \
                self.below_moving_averages(i, d):
                 allocation_dict[i] = 0
 
