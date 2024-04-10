@@ -28,11 +28,4 @@ class TradingStrategy(Strategy):
                 #if this_rsi[-1] < this_rsi[0]:
                 log("trade")
 
-            # log(str(this_rsi[-1]))
-            # log(str(this_rsi[-2]))
-            # log(str(this_rsi[-3]))
-            #if (this_sma[-1] > this_sma[-2]) && (this_rsi <= 30):
-                #log("trade.")
-                #return TargetAllocation(allocation_dict)
-
         return None
