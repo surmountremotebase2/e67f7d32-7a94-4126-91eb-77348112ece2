@@ -44,7 +44,7 @@ class TradingStrategy(Strategy):
     def has_decreased_volume(self, ticker, data):
         '''
         '''
-        retur data[-1][ticker]["volume"] < \
+        return data[-1][ticker]["volume"] < \
               data[-2][ticker]["volume"] < \
               data[-3][ticker]["volume"]
 
