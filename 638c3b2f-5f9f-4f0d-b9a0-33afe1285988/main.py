@@ -82,7 +82,7 @@ class TradingStrategy(Strategy):
 
         for i in self.tickers:
             if self.has_momentum(i, d) and \
-               self.above_moving_averages(id, d):
+               self.above_moving_averages(i, d):
                 allocation_dict[i] = 1
 
             if self.has_decelerated(i, d) and \
