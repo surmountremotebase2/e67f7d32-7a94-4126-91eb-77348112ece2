@@ -16,9 +16,6 @@ class TradingStrategy(Strategy):
 
     def run(self, data):
         d = data["ohlcv"]
-
-                
-        
         for i in self.tickers:
             # get yesterday's price at close
             current_price = d[-1][i]["close"]
