@@ -25,7 +25,6 @@ class TradingStrategy(Strategy):
             this_rsi = RSI(i, d, 14)
 
             if this_rsi[-1] <= 30:
-                #if this_rsi[-1] < this_rsi[0]:
                 log("trade")
 
         return None
