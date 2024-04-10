@@ -20,9 +20,10 @@ class TradingStrategy(Strategy):
         check if the ticker provided has 3 days of closes consecutively 
         above the previous days, this shows some sort of momentum
         '''
-        return data[-1][ticker]["close"]
-             > data[-2][ticker]["close"] 
-             < data[-3][ticker]["close"]
+        return data[-1][ticker]["close"] > data[-2][ticker]["close"] > data[-3][ticker]["close"]
+
+    def has_decelerated(self, ticker, data):
+        return data[-1][ticker]["close"] < data[-2][ticker]["close"] < data[-3][ticker]["close"]
 
     def above_moving_averages(self, ticker, data):
         '''
@@ -43,7 +44,7 @@ class TradingStrategy(Strategy):
             if self.has_momentum(i, d) and self.above_moving_averages(i, d):
                 allocation_dict[i] = 1
 
-            if not self.above_moving_averages(i, d) and self.is_overbought(i, d):
+            if not self.above_moving_averages(i, d) and self.is_overbought(i, d) and self.has_decelerated(i, d):
                 allocation_dict[i] = 0
 
         # for i in self.tickers:
