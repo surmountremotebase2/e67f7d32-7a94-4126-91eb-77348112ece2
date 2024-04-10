@@ -85,8 +85,7 @@ class TradingStrategy(Strategy):
                self.has_increased_volume(i, d):
                 allocation_dict[i] = 1
 
-            if self.below_moving_averages(i, d) and \
-               self.has_decelerated(i, d) and \
+            if self.has_decelerated(i, d) and \
                self.is_overbought(i, d):
                 allocation_dict[i] = 0
 
