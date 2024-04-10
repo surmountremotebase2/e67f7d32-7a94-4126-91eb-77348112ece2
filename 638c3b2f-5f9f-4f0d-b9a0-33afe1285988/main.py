@@ -31,7 +31,7 @@ class TradingStrategy(Strategy):
     
     def is_overbought(self, ticker, data):
         rsi = RSI(ticker, data, 14)
-        return rsi[-1] >= 70
+        return rsi[-1] >= 80
 
     def run(self, data):
         d = data["ohlcv"]
@@ -42,7 +42,7 @@ class TradingStrategy(Strategy):
                 allocation_dict[i] = 1
 
             if not self.above_moving_averages(i, d) and self.is_overbought(i, d):
-                allocation_dict[i] = 0.50
+                allocation_dict[i] = 0
 
         # for i in self.tickers:
         #     current_price = d[-1][i]["close"]
