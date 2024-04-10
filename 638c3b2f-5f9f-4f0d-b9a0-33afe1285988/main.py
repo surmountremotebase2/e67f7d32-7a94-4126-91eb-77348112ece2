@@ -53,6 +53,14 @@ class TradingStrategy(Strategy):
         my_sma = SMA(ticker, data, 21)
         return my_ema[-1] < my_sma[-1]
     
+    def is_oversold(self, ticker, data):
+        '''
+        determine if security is at oversold
+        levels using RSI as metric
+        '''
+        rsi = RSI(ticker, data, 14)
+        return rsi[-1] <= 35
+
     def is_overbought(self, ticker, data):
         '''
         determine if security is overbought using RSI
