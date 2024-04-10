@@ -70,8 +70,7 @@ class TradingStrategy(Strategy):
                 allocation_dict[i] = 1
 
             if self.is_overbought(i, d) and \
-               self.has_decelerated(i, d) and \
-               self.below_moving_averages(i, d):
+               self.has_decelerated(i, d):
                 allocation_dict[i] = 0
 
         # for i in self.tickers:
