@@ -37,4 +37,5 @@ class TradingStrategy(Strategy):
             #if (this_sma[-1] > this_sma[-2]) && (this_rsi <= 30):
                 #log("trade.")
                 #return TargetAllocation(allocation_dict)
+
         return None
