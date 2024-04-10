@@ -26,9 +26,9 @@ class TradingStrategy(Strategy):
         check if the price is currently above the 50 and 100
         day moving average
         '''
-        50d_sma = SMA(ticker, data, 50)
-        100d_sma = SMA(ticker, data, 100)
-        return data[-1][ticker]["close"] > 50d_sma[-1] > 100d_sma[-1]
+        fifty_sma = SMA(ticker, data, 50)
+        hundy_sma = SMA(ticker, data, 100)
+        return data[-1][ticker]["close"] > fifty_sma[-1] > hundy_sma[-1]
 
     def run(self, data):
         d = data["ohlcv"]
