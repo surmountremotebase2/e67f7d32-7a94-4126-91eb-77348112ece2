@@ -21,6 +21,12 @@ class TradingStrategy(Strategy):
             current_price = d[-1][i]["close"]
             this_sma = SMA(i, d, 50)
             this_rsi = RSI(i, d, 14)
+
+            log(str(current_price))
+            log(str(this_sma[-1]))
+            log(str(this_rsi[-1]))
+            log("---")
+
             if current_price > this_sma[-1] and this_rsi[-1] <= 30:
                 log("trade!")
 
