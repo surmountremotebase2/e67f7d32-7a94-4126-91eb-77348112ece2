@@ -44,7 +44,7 @@ class TradingStrategy(Strategy):
             if self.has_momentum(i, d) and self.above_moving_averages(i, d):
                 allocation_dict[i] = 1
 
-            if not self.above_moving_averages(i, d) and self.is_overbought(i, d) and self.has_decelerated(i, d):
+            if self.is_overbought(i, d) and self.has_decelerated(i, d):
                 allocation_dict[i] = 0
 
         # for i in self.tickers:
