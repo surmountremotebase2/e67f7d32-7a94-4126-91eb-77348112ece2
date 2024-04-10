@@ -24,6 +24,14 @@ class TradingStrategy(Strategy):
                data[-2][ticker]["close"] > \
                data[-3][ticker]["close"]
 
+    def has_volume(self, ticker, data):
+        '''
+        check if volume has increased the past few days
+        '''
+        return data[-1][ticker]["volume"] > \
+               data[-2][ticker]["volume"] > \
+               data[-3][ticker]["volume"]
+
     def has_decelerated(self, ticker, data):
         '''
         check if the security has decelerated over the past
@@ -52,14 +60,6 @@ class TradingStrategy(Strategy):
         my_ema = EMA(ticker, data, 7)
         my_sma = SMA(ticker, data, 21)
         return my_ema[-1] < my_sma[-1]
-    
-    def is_oversold(self, ticker, data):
-        '''
-        determine if security is at oversold
-        levels using RSI as metric
-        '''
-        rsi = RSI(ticker, data, 14)
-        return rsi[-1] <= 50
 
     def is_overbought(self, ticker, data):
         '''
@@ -76,7 +76,7 @@ class TradingStrategy(Strategy):
         for i in self.tickers:
             if self.has_momentum(i, d) and \
                self.above_moving_averages(i, d) and \
-               self.is_oversold(i, d):
+               self.has_volume(i, d):
                 allocation_dict[i] = 1
 
             if self.below_moving_averages(i, d) and \
