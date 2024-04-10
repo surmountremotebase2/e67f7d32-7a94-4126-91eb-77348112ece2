@@ -19,11 +19,9 @@ class TradingStrategy(Strategy):
         for i in self.tickers:
             # get yesterday's price at close
             current_price = d[-1][i]["close"]
-            log(str(current_price))
-
-            # get the current rsi for each symbol
+            this_sma = SMA(i, d, 50)
             this_rsi = RSI(i, d, 14)
-            if this_rsi[-1] <= 30:
-                log("trade")
+            if current_price > this_sma and this_rsi[-1] <= 30:
+                log("trade!")
 
         return None
