@@ -13,7 +13,7 @@ class TradingStrategy(Strategy):
 
     @property
     def interval(self):
-        return "4hour"
+        return "1day"
 
     def has_momentum(self, ticker, data):
         '''
@@ -88,8 +88,7 @@ class TradingStrategy(Strategy):
 
             if self.below_moving_averages(i, d) and \
                self.has_decelerated(i, d) and \
-               self.is_overbought(i, d) and \
-               self.has_decreased_volume(i, d):
+               self.is_overbought(i, d):
                 allocation_dict[i] = 0
 
         # for i in self.tickers:
