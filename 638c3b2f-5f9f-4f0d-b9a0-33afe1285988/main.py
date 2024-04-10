@@ -25,6 +25,10 @@ class TradingStrategy(Strategy):
                data[-3][ticker]["close"]
 
     def has_decelerated(self, ticker, data):
+        '''
+        check if the security has decelerated over the past
+        few days
+        '''
         return data[-1][ticker]["close"] < \
                data[-2][ticker]["close"] < \
                data[-3][ticker]["close"]
@@ -37,6 +41,10 @@ class TradingStrategy(Strategy):
         return data[-1][ticker]["close"] > my_ema[-1] 
     
     def is_overbought(self, ticker, data):
+        '''
+        determine if security is overbought using RSI
+        as a metric
+        '''
         rsi = RSI(ticker, data, 7)
         return rsi[-1] >= 70
 
