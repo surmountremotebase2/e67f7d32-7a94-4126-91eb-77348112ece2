@@ -24,7 +24,7 @@ class TradingStrategy(Strategy):
                data[-2][ticker]["close"] > \
                data[-3][ticker]["close"]
 
-    def has_volume(self, ticker, data):
+    def has_increased_volume(self, ticker, data):
         '''
         check if volume has increased the past few days
         '''
@@ -40,6 +40,13 @@ class TradingStrategy(Strategy):
         return data[-1][ticker]["close"] < \
                data[-2][ticker]["close"] < \
                data[-3][ticker]["close"]
+
+    def has_decreased_volume(self, ticker, data):
+        '''
+        '''
+        retur data[-1][ticker]["volume"] < \
+              data[-2][ticker]["volume"] < \
+              data[-3][ticker]["volume"]
 
     def above_moving_averages(self, ticker, data):
         '''
@@ -76,12 +83,13 @@ class TradingStrategy(Strategy):
         for i in self.tickers:
             if self.has_momentum(i, d) and \
                self.above_moving_averages(i, d) and \
-               self.has_volume(i, d):
+               self.has_increased_volume(i, d):
                 allocation_dict[i] = 1
 
             if self.below_moving_averages(i, d) and \
                self.has_decelerated(i, d) and \
-               self.is_overbought(i, d):
+               self.is_overbought(i, d) and \
+               self.has_decreased_volume(i, d):
                 allocation_dict[i] = 0
 
         # for i in self.tickers:
