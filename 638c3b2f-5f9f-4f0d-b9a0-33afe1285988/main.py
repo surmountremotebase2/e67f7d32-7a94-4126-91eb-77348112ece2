@@ -27,7 +27,7 @@ class TradingStrategy(Strategy):
         allocation_dict = {}
 
         for i in self.tickers:
-            if has_momentum(i, d):
+            if self.has_momentum(i, d):
                 log("MOMENTUM!")
 
         # for i in self.tickers:
