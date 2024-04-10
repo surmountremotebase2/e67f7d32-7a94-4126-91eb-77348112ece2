@@ -19,8 +19,7 @@ class TradingStrategy(Strategy):
         check if the ticker provided has 3 days of closes consecutively 
         above the previous days, this shows some sort of momentum
         '''
-        d = data["ohlcv"]
-        return d[-1][ticker]["close"] > d[-2][ticker]["close"] > d[-3][ticker]["close"]
+        return data[-1][ticker]["close"] > data[-2][ticker]["close"] > data[-3][ticker]["close"]
 
     def run(self, data):
         d = data["ohlcv"]
