@@ -31,11 +31,11 @@ class TradingStrategy(Strategy):
         return data[-1][ticker]["close"] > fifty_sma[-1] > hundy_sma[-1]
 
     def is_oversold(self, ticker, data):
-        rsi = RSI(i, d, 14)
+        rsi = RSI(ticker, d, 14)
         return rsi[-1] <= 30
 
     def is_overbought(self, ticker, data):
-        rsi = RSI(i, d, 14)
+        rsi = RSI(ticker, d, 14)
         return rsi[-1] >= 70
 
     def run(self, data):
