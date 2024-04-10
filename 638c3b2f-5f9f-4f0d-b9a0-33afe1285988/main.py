@@ -19,7 +19,7 @@ class TradingStrategy(Strategy):
         for i in self.tickers:
             # get yesterday's price at close
             current_price = d[-1][i]["close"]
-            log(current_price)
+            log(str(current_price))
 
             # get the current rsi for each symbol
             this_rsi = RSI(i, d, 14)
