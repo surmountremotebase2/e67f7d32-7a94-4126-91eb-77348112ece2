@@ -38,8 +38,13 @@ class TradingStrategy(Strategy):
         check if the price is currently above the EMA
         '''
         my_ema = EMA(ticker, data, 21)
-        my_ema_2 = EMA(ticker, data, 50)
-        return data[-1][ticker]["close"] > my_ema[-1] > my_ema_2[-1]
+        my_sma = SMA(ticker, data, 50)
+        return data[-1][ticker]["close"] > my_ema[-1] > my_sma[-1]
+
+    def below_moving_averages(self, ticker, data):
+        my_ema = EMA(ticker, data, 21)
+        my_sma = SMA(ticker, data, 50)
+        return data[-1][ticker]["close"] < my_ema[-1] > my_sma[-1]
     
     def is_overbought(self, ticker, data):
         '''
