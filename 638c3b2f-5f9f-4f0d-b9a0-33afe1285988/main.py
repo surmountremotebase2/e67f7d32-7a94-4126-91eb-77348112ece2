@@ -82,10 +82,11 @@ class TradingStrategy(Strategy):
 
         for i in self.tickers:
             if self.has_momentum(i, d) and \
-               self.has_increased_volume(i, d):
+               self.above_moving_averages(id, d):
                 allocation_dict[i] = 1
 
             if self.has_decelerated(i, d) and \
+               self.below_moving_averages(i, d) and \
                self.is_overbought(i, d):
                 allocation_dict[i] = 0
 
