@@ -23,9 +23,9 @@ class TradingStrategy(Strategy):
 
     def above_moving_averages(self, ticker, data):
         '''
-        check if the price is currently above the SMA
+        check if the price is currently above the EMA
         '''
-        fifty_sma = SMA(ticker, data, 50)
+        fifty_sma = EMA(ticker, data, 50)
         return data[-1][ticker]["close"] > fifty_sma[-1] 
     
     def is_overbought(self, ticker, data):
