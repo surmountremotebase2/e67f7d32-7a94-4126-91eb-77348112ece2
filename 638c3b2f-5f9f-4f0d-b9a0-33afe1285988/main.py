@@ -17,5 +17,9 @@ class TradingStrategy(Strategy):
     def run(self, data):
         d = data["ohlcv"]
         for i in self.tickers:
-            log(i)
-        return TargetAllocation({})
+            this_sma = SMA(i, d, 5)
+            this_rsi = RSI(i, d, 14)
+            if this_sma[-1]>this_ma[-2] && this_rsi<=30:
+                log("trade.")
+                #return TargetAllocation(allocation_dict)
+        return None
