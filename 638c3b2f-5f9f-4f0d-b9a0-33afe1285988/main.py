@@ -23,7 +23,6 @@ class TradingStrategy(Strategy):
 
             # get the current rsi for each symbol
             this_rsi = RSI(i, d, 14)
-
             if this_rsi[-1] <= 30:
                 log("trade")
 
