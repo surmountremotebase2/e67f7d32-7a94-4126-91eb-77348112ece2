@@ -16,6 +16,6 @@ class TradingStrategy(Strategy):
 
     def run(self, data):
         d = data["ohlcv"]
-        for i in self.assets:
+        for i in self.tickers:
             log(i)
         return TargetAllocation({})
