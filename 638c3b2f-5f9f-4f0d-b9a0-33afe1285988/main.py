@@ -41,7 +41,7 @@ class TradingStrategy(Strategy):
         '''
         my_ema = EMA(ticker, data, 21)
         my_sma = SMA(ticker, data, 50)
-        return data[-1][ticker]["close"] > my_ema[-1] > my_sma[-1]
+        return my_ema[-1] > my_sma[-1]
 
     def below_moving_averages(self, ticker, data):
         '''
