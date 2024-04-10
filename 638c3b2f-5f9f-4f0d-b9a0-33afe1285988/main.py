@@ -39,7 +39,7 @@ class TradingStrategy(Strategy):
         '''
         my_ema = EMA(ticker, data, 21)
         my_ema_2 = EMA(ticker, data, 50)
-        return data[-1][ticker]["close"] > my_ema[-1] > my_ema2[-1]
+        return data[-1][ticker]["close"] > my_ema[-1] > my_ema_2[-1]
     
     def is_overbought(self, ticker, data):
         '''
