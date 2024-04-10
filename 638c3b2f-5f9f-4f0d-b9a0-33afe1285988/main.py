@@ -26,8 +26,8 @@ class TradingStrategy(Strategy):
         check if the price is currently above the 50 and 100
         day moving average
         '''
-        fifty_sma = SMA(ticker, data, 50)
-        hundy_sma = SMA(ticker, data, 100)
+        fifty_sma = SMA(ticker, data, 10)
+        hundy_sma = SMA(ticker, data, 50)
         return data[-1][ticker]["close"] > fifty_sma[-1] > hundy_sma[-1]
     
     def is_overbought(self, ticker, data):
