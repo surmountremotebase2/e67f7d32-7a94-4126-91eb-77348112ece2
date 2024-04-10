@@ -4,7 +4,7 @@ from surmount.logging import log
 
 class TradingStrategy(Strategy):
     def __init__(self):
-        self.tickers = ["SPY", "QQQ"]
+        self.tickers = ["SPY", "QQQ", "SOXX"]
         #self.tickers = ["MNDY", "TTD", "OKTA", "ROKU"]
 
     @property
