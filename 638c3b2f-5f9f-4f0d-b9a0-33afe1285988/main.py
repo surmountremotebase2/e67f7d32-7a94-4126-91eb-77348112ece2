@@ -49,7 +49,7 @@ class TradingStrategy(Strategy):
         and that it is still above the 50 day SMA. this may mean
         we are seeing a downward trend start.
         '''
-        my_ema = EMA(ticker, data, 14)
+        my_ema = EMA(ticker, data, 7)
         my_sma = SMA(ticker, data, 21)
         return my_ema[-1] < my_sma[-1]
     
