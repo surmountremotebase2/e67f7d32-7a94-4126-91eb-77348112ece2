@@ -30,13 +30,24 @@ class TradingStrategy(Strategy):
         hundy_sma = SMA(ticker, data, 100)
         return data[-1][ticker]["close"] > fifty_sma[-1] > hundy_sma[-1]
 
+    def is_oversold(self, ticker, data):
+        rsi = RSI(i, d, 14)
+        return rsi[-1] <= 30
+
+    def is_overbought(self, ticker, data):
+        rsi = RSI(i, d, 14)
+        return rsi[-1] >= 70
+
     def run(self, data):
         d = data["ohlcv"]
         allocation_dict = {}
 
         for i in self.tickers:
-            if self.has_momentum(i, d) and self.above_moving_averages(i, d):
-                log("MOMENTUM!")
+            if self.has_momentum(i, d) and self.above_moving_averages(i, d) and is_oversold:
+                log("BUY")
+
+            if not self.has_momentum(i,d) and not self.above_moving_averages(i, d):
+                log("SELL")
 
         # for i in self.tickers:
         #     current_price = d[-1][i]["close"]
