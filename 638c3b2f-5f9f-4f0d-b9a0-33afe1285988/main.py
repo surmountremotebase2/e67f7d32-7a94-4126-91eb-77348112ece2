@@ -46,7 +46,7 @@ class TradingStrategy(Strategy):
             if self.has_momentum(i, d) and self.above_moving_averages(i, d) and self.is_oversold(i, d):
                 log("BUY")
 
-            if not self.has_momentum(i,d) and not self.above_moving_averages(i, d):
+            if not self.above_moving_averages(i, d) and self.is_overbought(i, d):
                 log("SELL")
 
         # for i in self.tickers:
