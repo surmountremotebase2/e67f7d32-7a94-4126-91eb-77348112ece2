@@ -24,4 +24,7 @@ class TradingStrategy(Strategy):
             if (current_price > fifty_day_sma[-1]) and (fifty_day_sma[-1] > two_hundy_day_sma[-1]):
                 allocation_dict[i] = 1
 
+            if (current_price < fifty_day_sma[-1] < two_hundy_day_sma[-1]):
+                allocation_dict[i] = 0
+
         return TargetAllocation(allocation_dict)
