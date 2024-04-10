@@ -20,8 +20,9 @@ class TradingStrategy(Strategy):
             #this_sma = SMA(i, d, 5)
             this_rsi = RSI(i, d, 14)
 
-            if (this_rsi <= 30) && (this_rsi[-1]>this_rsa[-2]>this_rsi[-3]):
-                log("trade!")
+            if this_rsi <= 30:
+                if this_rsi[-3] < this_rsi[-2] < this_rsi[-1]:
+                    log("trade")
 
             # log(str(this_rsi[-1]))
             # log(str(this_rsi[-2]))
