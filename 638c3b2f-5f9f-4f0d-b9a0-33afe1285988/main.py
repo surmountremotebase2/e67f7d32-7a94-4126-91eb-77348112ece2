@@ -75,7 +75,8 @@ class TradingStrategy(Strategy):
 
         for i in self.tickers:
             if self.has_momentum(i, d) and \
-               self.above_moving_averages(i, d):
+               self.above_moving_averages(i, d) and \
+               self.is_oversold(i, d):
                 allocation_dict[i] = 1
 
             if self.below_moving_averages(i, d) and \
