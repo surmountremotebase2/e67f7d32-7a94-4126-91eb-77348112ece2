@@ -19,8 +19,9 @@ class TradingStrategy(Strategy):
         allocation_dict = {}
         for i in self.tickers:
             current_price = d[-1][i]["close"]
-            this_sma = SMA(i, d, 50)
-            if (current_price > this_sma[-1]) and (this_sma[-1] > this_sma[-2]):
+            fifty_day_sma = SMA(i, d, 50)
+            two_hundy_day_sma = SMA(i, d, 200)
+            if (current_price > fifty_day_sma[-1]) and (fifty_day_sma[-1] > two_hundy_day_sma):
                 allocation_dict[i] = 1
 
         return TargetAllocation(allocation_dict)
