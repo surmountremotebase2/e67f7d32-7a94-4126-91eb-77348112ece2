@@ -22,7 +22,7 @@ class TradingStrategy(Strategy):
             this_sma = SMA(i, d, 50)
             this_rsi = RSI(i, d, 14)
             if current_price > this_sma[-1]:
-                allocation_dict.append({i: 1})
+                allocation_dict[i] = 1
 
         # self.count += 1
         # if (self.count % 30 == 1):
