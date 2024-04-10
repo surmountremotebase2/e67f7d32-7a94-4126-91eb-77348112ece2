@@ -18,6 +18,7 @@ class TradingStrategy(Strategy):
         d = data["ohlcv"]
         for i in self.tickers:
             #this_sma = SMA(i, d, 5)
+            log(i)
             this_rsi = RSI(i, d, 14)
 
             log(str(this_rsi[0]))
