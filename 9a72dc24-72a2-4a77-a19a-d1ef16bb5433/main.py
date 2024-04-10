@@ -17,7 +17,7 @@ class TradingStrategy(Strategy):
       holdings = data["holdings"]
       data = data["ohlcv"]
 
-      log(data)
+      log("Hello")
       
       # allocation_dict = {}
       # rsi_dict = {}
