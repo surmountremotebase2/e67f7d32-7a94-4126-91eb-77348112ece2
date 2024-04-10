@@ -13,7 +13,7 @@ class TradingStrategy(Strategy):
 
     @property
     def interval(self):
-        return "1hour"
+        return "4hour"
 
     def has_momentum(self, ticker, data):
         '''
