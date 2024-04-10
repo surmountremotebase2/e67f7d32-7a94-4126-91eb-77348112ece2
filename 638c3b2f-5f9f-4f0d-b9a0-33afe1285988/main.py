@@ -37,7 +37,7 @@ class TradingStrategy(Strategy):
         '''
         check if the price is currently above the EMA
         '''
-        my_ema = EMA(ticker, data, 21)
+        my_ema = EMA(ticker, data, 50)
         return data[-1][ticker]["close"] > my_ema[-1] 
     
     def is_overbought(self, ticker, data):
@@ -45,7 +45,7 @@ class TradingStrategy(Strategy):
         determine if security is overbought using RSI
         as a metric
         '''
-        rsi = RSI(ticker, data, 7)
+        rsi = RSI(ticker, data, 14)
         return rsi[-1] >= 70
 
     def run(self, data):
