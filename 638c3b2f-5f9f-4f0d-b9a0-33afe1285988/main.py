@@ -28,7 +28,7 @@ class TradingStrategy(Strategy):
         '''
         fifty_sma = SMA(ticker, data, 50)
         hundy_sma = SMA(ticker, data, 100)
-        return data[-1][ticker]["close"] > fifty_sma[-1] > hundy_sma[-1]
+        return data[-1][ticker]["close"] > fifty_sma[-1] #> hundy_sma[-1]
     
     def is_overbought(self, ticker, data):
         rsi = RSI(ticker, data, 14)
