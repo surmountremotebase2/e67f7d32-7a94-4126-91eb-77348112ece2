@@ -19,7 +19,7 @@ class TradingStrategy(Strategy):
         for i in self.tickers:
             this_sma = SMA(i, d, 5)
             this_rsi = RSI(i, d, 14)
-            if this_sma[-1]>this_sma[-2] && this_rsi<=30:
+            if (this_sma[-1]>this_sma[-2]) && (this_rsi<=30):
                 log("trade.")
                 #return TargetAllocation(allocation_dict)
         return None
