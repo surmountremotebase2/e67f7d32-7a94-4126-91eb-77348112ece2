@@ -35,13 +35,20 @@ class TradingStrategy(Strategy):
 
     def above_moving_averages(self, ticker, data):
         '''
-        check if the price is currently above the EMA
+        check if the price is currently above the 21 day EMA
+        and that is above the 50 day SMA. this informs us if
+        we are buying into strength.
         '''
         my_ema = EMA(ticker, data, 21)
         my_sma = SMA(ticker, data, 50)
         return data[-1][ticker]["close"] > my_ema[-1] > my_sma[-1]
 
     def below_moving_averages(self, ticker, data):
+        '''
+        check if the current price is below the 21 day EMA
+        and that it is still above the 50 day SMA. this may mean
+        we are seeing a downward trend start.
+        '''
         my_ema = EMA(ticker, data, 21)
         my_sma = SMA(ticker, data, 50)
         return data[-1][ticker]["close"] < my_ema[-1] > my_sma[-1]
