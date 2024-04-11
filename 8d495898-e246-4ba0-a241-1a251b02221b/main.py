@@ -19,16 +19,16 @@ class TradingStrategy(Strategy):
         if the fast EMA crosses over the slow EMA
         '''
         ema_fast = EMA(ticker, data, 7)
-        ema_slow = EMA(ticker, data, 21)
+        ema_slow = EMA(ticker, data, 14)
         return (ema_fast[-1] > ema_slow[-1]) and \
                (ema_fast[-2] < ema_slow[-2])
 
     def has_top_reversal(self, ticker, data):
         '''
-        if the fast EMA crosses over the slow EMA
+        if the slow EMA crosses over the fast EMA
         '''
         ema_fast = EMA(ticker, data, 7)
-        ema_slow = EMA(ticker, data, 21)
+        ema_slow = EMA(ticker, data, 14)
         return (ema_fast[-1] < ema_slow[-1]) and \
                (ema_fast[-2] > ema_slow[-2]) 
 
