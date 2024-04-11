@@ -15,7 +15,22 @@ class TradingStrategy(Strategy):
         return "1day"
 
     def has_positive_trend(self, ticker, data):
-        
+        '''
+        check if the ticker provided has 3 days of closes consecutively 
+        above the previous days, this shows some sort of momentum
+        '''
+        return data[-1][ticker]["close"] > \
+               data[-2][ticker]["close"] > \
+               data[-3][ticker]["close"]
+
+    def has_negative_trend(self, ticker, data):
+        '''
+        check if the ticker provided has 3 days of closes consecutively 
+        above the previous days, this shows some sort of momentum
+        '''
+        return data[-1][ticker]["close"] < \
+               data[-2][ticker]["close"] < \
+               data[-3][ticker]["close"]
 
     def has_bottom_reversal(self, ticker, data):
         '''
@@ -48,10 +63,10 @@ class TradingStrategy(Strategy):
         # how the allocation_dict logic works, this would need 
         # to be fixed to support multiple tickers truly
         for i in self.tickers:
-            if self.has_bottom_reversal(i, d):
+            if self.has_bottom_reversal(i, d) and self.has_positive_trend(i, d):
                 allocation_dict = {i: 1}
 
-            if self.has_top_reversal(i, d):
+            if self.has_top_reversal(i, d) and self.has_negative_trend(i, d):
                 allocation_dict = {i: 0}
 
         return TargetAllocation(allocation_dict)
