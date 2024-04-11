@@ -23,7 +23,7 @@ class TradingStrategy(Strategy):
                data[-2][ticker]["close"] > \
                data[-3][ticker]["close"]
 
-    def has_increased_volume(self, ticker, data):
+    def has_volume(self, ticker, data):
         '''
         check if volume has increased the past few days
         '''
@@ -31,72 +31,23 @@ class TradingStrategy(Strategy):
                data[-2][ticker]["volume"] > \
                data[-3][ticker]["volume"]
 
-    def has_decelerated(self, ticker, data):
+    def has_reversal(self, ticker, data):
         '''
-        check if the security has decelerated over the past
-        few days
+        if the fast EMA crosses over the slow EMA
         '''
-        return data[-1][ticker]["close"] < \
-               data[-2][ticker]["close"] < \
-               data[-3][ticker]["close"]
-
-    def has_decreased_volume(self, ticker, data):
-        '''
-        '''
-        return data[-1][ticker]["volume"] < \
-              data[-2][ticker]["volume"] < \
-              data[-3][ticker]["volume"]
-
-    def above_moving_averages(self, ticker, data):
-        '''
-        check if the price is currently above the 21 day EMA
-        and that is above the 50 day SMA. this informs us if
-        we are buying into strength.
-        '''
-        my_ema = EMA(ticker, data, 21)
-        my_sma = SMA(ticker, data, 50)
-        return data[-1][ticker]["close"] > my_ema[-1] > my_sma[-1]
-
-    def below_moving_averages(self, ticker, data):
-        '''
-        check if the current price is below the 21 day EMA
-        and that it is still above the 50 day SMA. this may mean
-        we are seeing a downward trend start.
-        '''
-        my_ema = EMA(ticker, data, 7)
-        my_sma = SMA(ticker, data, 21)
-        return my_ema[-1] < my_sma[-1]
-
-    def is_overbought(self, ticker, data):
-        '''
-        determine if security is overbought using RSI
-        as a metric
-        '''
-        rsi = RSI(ticker, data, 14)
-        return rsi[-1] >= 70
+        ema_fast = EMA(ticker, data, 7)
+        ema_slow = EMA(ticker, data, 21)
+        return (ema_fast[-1] > ema_slow[-1]) and \
+               (ema_fast[-2] < ema_slow[-2])
 
     def run(self, data):
         d = data["ohlcv"]
         allocation_dict = {}
 
         for i in self.tickers:
-            if self.has_momentum(i, d) and \
-               self.above_moving_averages(i, d):
-                allocation_dict[i] = 1
-
-            if self.has_decelerated(i, d) and \
-               self.below_moving_averages(i, d) and \
-               self.is_overbought(i, d):
-                allocation_dict[i] = 0
-
-        # for i in self.tickers:
-        #     current_prise = d[-1][i]["close"]
-        #     fifty_day_sma = SMA(i, d, 50)
-        #     two_hundy_day_sma = SMA(i, d, 200)
-        #     if (current_price > fifty_day_sma[-1]) and (fifty_day_sma[-1] > two_hundy_day_sma[-1]):
-        #         allocation_dict[i] = 1
-
-        #     if (current_price < fifty_day_sma[-1] < two_hundy_day_sma[-1]):
-        #         allocation_dict[i] = 0
+            if self.has_reversal(i, d) and \
+               self.has_momentum(i, d) and \
+               self.has_volume(i, d):
+                allocation_dict = {i: 1}
 
         return TargetAllocation(allocation_dict)
