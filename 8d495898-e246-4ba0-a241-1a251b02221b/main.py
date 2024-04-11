@@ -63,10 +63,10 @@ class TradingStrategy(Strategy):
         # how the allocation_dict logic works, this would need 
         # to be fixed to support multiple tickers truly
         for i in self.tickers:
-            if self.has_bottom_reversal(i, d) or self.has_positive_trend(i, d):
+            if self.has_bottom_reversal(i, d):
                 allocation_dict = {i: 1}
 
-            if self.has_top_reversal(i, d) or self.has_negative_trend(i, d):
+            if self.has_top_reversal(i, d):
                 allocation_dict = {i: 0}
 
         return TargetAllocation(allocation_dict)
