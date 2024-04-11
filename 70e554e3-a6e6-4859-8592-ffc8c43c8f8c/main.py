@@ -14,6 +14,10 @@ class TradingStrategy(Strategy):
     def interval(self):
         return "1day"
 
+    def has_rising_rsi(self, ticker, data):
+        rsi = RSI(ticker, data, 14)
+        return (rsi[-1] >= 50) and (rsi[-1] > rsi[-2] > rsi[-3])
+
     def run(self, data):
         d = data["ohlcv"]
         allocation_dict = {}
@@ -21,7 +25,7 @@ class TradingStrategy(Strategy):
             bb = BB(i, d, 14, 1)
             rsi = RSI(i, d, 14)
 
-            if (d[-1][i]["close"] > bb['lower'][-1]) and (rsi[-1] >= 50):
+            if (d[-1][i]["close"] > bb['lower'][-1]) and self.has_rising_rsi(i, d):
                 allocation_dict = {i: 1}
 
             if (d[-1][i]["close"] < bb['lower'][-1]):
