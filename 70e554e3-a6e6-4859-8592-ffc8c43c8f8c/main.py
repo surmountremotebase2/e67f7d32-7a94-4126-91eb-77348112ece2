@@ -4,7 +4,11 @@ from surmount.logging import log
 
 class TradingStrategy(Strategy):
     def __init__(self):
-        self.tickers = ["QQQ"]
+        self.tickers = ["QQQ", "VTI"]
+        self.weights = {
+            "QQQ": 0.2,
+            "VTI": 0.8
+        }
 
     @property
     def assets(self):
@@ -34,7 +38,7 @@ class TradingStrategy(Strategy):
 
             # entrace
             if (d[-1][i]['close'] > bb['mid'][-1]) and self.has_rising_rsi(i, d):
-                allocation_dict = {i: 1}
+                allocation_dict = {i: self.weights[i]}
             
             # stop loss
             if (d[-1][i]['close'] < bb['lower'][-1]):
