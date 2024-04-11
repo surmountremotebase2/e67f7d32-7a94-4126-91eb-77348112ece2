@@ -25,15 +25,15 @@ class TradingStrategy(Strategy):
             bb = BB(i, d, 14, 1)
 
             # entrace
-            if (d[-1][i]["close"] > bb['mid'][-1]) and self.has_rising_rsi(i, d):
+            if (d[-1][i]['close'] > bb['mid'][-1]) and self.has_rising_rsi(i, d):
                 allocation_dict = {i: 1}
 
             # take profits
-            if (d[-1][i]["close"] > bb['upper'][-1]:
+            if (d[-1][i]['close'] > bb['upper'][-1]:
                 allocation_dict = {i: 0}
             
             # stop loss
-            if (d[-1][i]["close"] < bb['lower'][-1]):
+            if (d[-1][i]['close'] < bb['lower'][-1]):
                 allocation_dict = {i: 0}
 
         return TargetAllocation(allocation_dict)
