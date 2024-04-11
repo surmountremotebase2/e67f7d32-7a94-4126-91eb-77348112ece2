@@ -31,7 +31,7 @@ class TradingStrategy(Strategy):
                data[-2][ticker]["volume"] > \
                data[-3][ticker]["volume"]
 
-    def has_reversal(self, ticker, data):
+    def has_bottom_reversal(self, ticker, data):
         '''
         if the fast EMA crosses over the slow EMA
         '''
@@ -40,14 +40,26 @@ class TradingStrategy(Strategy):
         return (ema_fast[-1] > ema_slow[-1]) and \
                (ema_fast[-2] < ema_slow[-2])
 
+    def has_top_reversal(self, ticker, data):
+        '''
+        if the fast EMA crosses over the slow EMA
+        '''
+        ema_fast = EMA(ticker, data, 7)
+        ema_slow = EMA(ticker, data, 21)
+        return (ema_fast[-1] < ema_slow[-1]) and \
+               (ema_fast[-2] > ema_slow[-2]) 
+
     def run(self, data):
         d = data["ohlcv"]
         allocation_dict = {}
 
         for i in self.tickers:
-            if self.has_reversal(i, d) and \
+            if self.has_bottom_reversal(i, d) and \
                self.has_momentum(i, d) and \
                self.has_volume(i, d):
                 allocation_dict = {i: 1}
+
+            if self.has_top_reversal(i, d):
+                allocation_dict = {i: 0}
 
         return TargetAllocation(allocation_dict)
