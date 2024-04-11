@@ -36,6 +36,9 @@ class TradingStrategy(Strategy):
         d = data["ohlcv"]
         allocation_dict = {}
 
+        # this assumes that there is only one ticker because of
+        # how the allocation_dict logic works, this would need 
+        # to be fixed to support multiple tickers truly
         for i in self.tickers:
             if self.has_bottom_reversal(i, d):
                 allocation_dict = {i: 1}
