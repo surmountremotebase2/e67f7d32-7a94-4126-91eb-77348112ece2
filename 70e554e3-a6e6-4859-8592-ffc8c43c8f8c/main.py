@@ -37,7 +37,7 @@ class TradingStrategy(Strategy):
                 allocation_dict = {i: 1}
             
             # stop loss
-            if (d[-1][i]['close'] < bb['lower'][-1]):
+            if (d[-1][i]['open'] < bb['lower'][-1]):
                 allocation_dict = {i: 0}
 
         return TargetAllocation(allocation_dict)
