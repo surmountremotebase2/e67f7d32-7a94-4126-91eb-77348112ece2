@@ -12,16 +12,7 @@ class TradingStrategy(Strategy):
 
     @property
     def interval(self):
-        return "4hour"
-
-    def has_momentum(self, ticker, data):
-        '''
-        check if the ticker provided has 3 days of closes consecutively 
-        above the previous days, this shows some sort of momentum
-        '''
-        return data[-1][ticker]["close"] > \
-               data[-2][ticker]["close"] > \
-               data[-3][ticker]["close"]
+        return "1day"
 
     def run(self, data):
         d = data["ohlcv"]
