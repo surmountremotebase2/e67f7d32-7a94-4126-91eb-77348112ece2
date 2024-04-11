@@ -29,7 +29,7 @@ class TradingStrategy(Strategy):
                 allocation_dict = {i: 1}
 
             # take profits
-            if (d[-1][i]['close'] > bb['upper'][-1]:
+            if (d[-1][i]['close'] > bb['upper'][-1]):
                 allocation_dict = {i: 0}
             
             # stop loss
