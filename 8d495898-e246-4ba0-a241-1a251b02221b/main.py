@@ -27,8 +27,8 @@ class TradingStrategy(Strategy):
         '''
         if the fast EMA crosses over the slow EMA
         '''
-        ema_fast = EMA(ticker, data, 7)
-        ema_slow = SMA(ticker, data, 14)
+        ema_fast = EMA(ticker, data, 5)
+        ema_slow = SMA(ticker, data, 11)
         return (ema_fast[-1] > ema_slow[-1]) and \
                (ema_fast[-2] < ema_slow[-2])
 
