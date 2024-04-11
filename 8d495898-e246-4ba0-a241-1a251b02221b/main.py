@@ -23,14 +23,6 @@ class TradingStrategy(Strategy):
                data[-2][ticker]["close"] > \
                data[-3][ticker]["close"]
 
-    def has_volume(self, ticker, data):
-        '''
-        check if volume has increased the past few days
-        '''
-        return data[-1][ticker]["volume"] > \
-               data[-2][ticker]["volume"] > \
-               data[-3][ticker]["volume"]
-
     def has_bottom_reversal(self, ticker, data):
         '''
         if the fast EMA crosses over the slow EMA
@@ -54,7 +46,7 @@ class TradingStrategy(Strategy):
         allocation_dict = {}
 
         for i in self.tickers:
-            if self.has_bottom_reversal(i, d) and self.has_volume(i, d):
+            if self.has_bottom_reversal(i, d) and self.has_momentum(i, d):
                 allocation_dict = {i: 1}
 
             if self.has_top_reversal(i, d):
