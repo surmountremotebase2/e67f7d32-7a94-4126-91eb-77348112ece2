@@ -28,9 +28,9 @@ class TradingStrategy(Strategy):
             #
             # if price opens below middle bollinger band and closes above middle band
             # and if there is rising RSI above 50
-            if (d[-1][i]['open'] < bb['mid'][-1]) and \
-               (d[-1][i]['close'] > bb['mid'][-1]):
-                allocation_dict = {i: 1}
+            # if (d[-1][i]['open'] < bb['mid'][-1]) and \
+            #    (d[-1][i]['close'] > bb['mid'][-1]):
+            #     allocation_dict = {i: 1}
 
             # entrace
             if (d[-1][i]['close'] > bb['mid'][-1]) and self.has_rising_rsi(i, d):
