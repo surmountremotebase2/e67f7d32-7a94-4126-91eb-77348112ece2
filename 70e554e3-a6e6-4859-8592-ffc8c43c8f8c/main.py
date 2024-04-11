@@ -27,10 +27,6 @@ class TradingStrategy(Strategy):
             # entrace
             if (d[-1][i]['close'] > bb['mid'][-1]) and self.has_rising_rsi(i, d):
                 allocation_dict = {i: 1}
-
-            # take profits
-            if (d[-1][i]['close'] > bb['upper'][-1]):
-                allocation_dict = {i: 0}
             
             # stop loss
             if (d[-1][i]['close'] < bb['lower'][-1]):
