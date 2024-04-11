@@ -23,6 +23,14 @@ class TradingStrategy(Strategy):
                data[-2][ticker]["close"] > \
                data[-3][ticker]["close"]
 
+    def has_increased_volume(self, ticker, data):
+        '''
+        check if volume has increased the past few days
+        '''
+        return data[-1][ticker]["volume"] > \
+               data[-2][ticker]["volume"] > \
+               data[-3][ticker]["volume"]
+
     def has_bottom_reversal(self, ticker, data):
         '''
         if the fast EMA crosses over the slow EMA
@@ -50,7 +58,7 @@ class TradingStrategy(Strategy):
         # how the allocation_dict logic works, this would need 
         # to be fixed to support multiple tickers truly
         for i in self.tickers:
-            if self.has_bottom_reversal(i, d):
+            if self.has_bottom_reversal(i, d) and self.has_increased_volume(i, d):
                 allocation_dict = {i: 1}
 
             if self.has_top_reversal(i, d):
