@@ -20,4 +20,6 @@ class TradingStrategy(Strategy):
         for i in self.tickers:
             bb = BB(i, d, 14, 1)
 
+            if bb['lower'][-1] 
+
         return TargetAllocation(allocation_dict)
