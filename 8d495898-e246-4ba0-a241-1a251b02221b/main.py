@@ -44,7 +44,7 @@ class TradingStrategy(Strategy):
 
     def has_rsi_crossover(self, ticker, data):
         rsi = RSI(ticker, data, 7)
-        return rsi[-1] > 50 and rsi[-2] <= 50
+        return rsi[-1] > 50 and (rsi[-2] <= 50 or rsi[-3] <= 30)
 
     def run(self, data):
         d = data["ohlcv"]
