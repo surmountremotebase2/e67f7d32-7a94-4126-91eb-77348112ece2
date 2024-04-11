@@ -24,7 +24,7 @@ class TradingStrategy(Strategy):
             if (d[-1][i]["close"] > bb['lower'][-1]) and (rsi[-1] >= 50):
                 allocation_dict = {i: 1}
 
-            if (d[-1][i][closer] < bb['lower'][-1]):
+            if (d[-1][i]["close"] < bb['lower'][-1]):
                 allocation_dict = {i: 0}
 
         return TargetAllocation(allocation_dict)
