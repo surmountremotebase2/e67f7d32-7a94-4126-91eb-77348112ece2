@@ -14,23 +14,6 @@ class TradingStrategy(Strategy):
     def interval(self):
         return "1day"
 
-    def has_positive_trend(self, ticker, data):
-        '''
-        check if the ticker provided has 3 days of closes consecutively 
-        above the previous days, this shows some sort of momentum
-        '''
-        return data[-1][ticker]["close"] > \
-               data[-2][ticker]["close"] > \
-               data[-3][ticker]["close"]
-
-    def has_increased_volume(self, ticker, data):
-        '''
-        check if volume has increased the past few days
-        '''
-        return data[-1][ticker]["volume"] > \
-               data[-2][ticker]["volume"] > \
-               data[-3][ticker]["volume"]
-
     def has_bottom_reversal(self, ticker, data):
         '''
         if the fast EMA crosses over the slow EMA
