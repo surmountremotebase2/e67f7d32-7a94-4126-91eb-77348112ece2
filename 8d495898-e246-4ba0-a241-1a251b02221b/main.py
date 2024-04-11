@@ -14,6 +14,9 @@ class TradingStrategy(Strategy):
     def interval(self):
         return "1day"
 
+    def has_positive_trend(self, ticker, data):
+        
+
     def has_bottom_reversal(self, ticker, data):
         '''
         if the fast EMA crosses over the slow EMA
