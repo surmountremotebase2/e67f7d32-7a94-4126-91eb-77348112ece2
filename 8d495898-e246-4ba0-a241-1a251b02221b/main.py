@@ -12,7 +12,7 @@ class TradingStrategy(Strategy):
 
     @property
     def interval(self):
-        return "4hour"
+        return "1day"
 
     def has_positive_trend(self, ticker, data):
         '''
