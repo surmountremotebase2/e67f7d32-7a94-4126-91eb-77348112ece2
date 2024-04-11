@@ -46,7 +46,7 @@ class TradingStrategy(Strategy):
         allocation_dict = {}
 
         for i in self.tickers:
-            if self.has_bottom_reversal(i, d) and self.has_momentum(i, d):
+            if self.has_bottom_reversal(i, d):
                 allocation_dict = {i: 1}
 
             if self.has_top_reversal(i, d):
