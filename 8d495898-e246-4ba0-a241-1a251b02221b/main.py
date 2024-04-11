@@ -30,7 +30,8 @@ class TradingStrategy(Strategy):
         ema_fast = EMA(ticker, data, 7)
         ema_slow = EMA(ticker, data, 14)
         return (ema_fast[-1] < ema_slow[-1]) and \
-               (ema_fast[-2] > ema_slow[-2]) 
+               (ema_fast[-2] > ema_slow[-2]) and \
+               (ema_fast[-3]) > ema_slow[-3])
 
     def run(self, data):
         d = data["ohlcv"]
