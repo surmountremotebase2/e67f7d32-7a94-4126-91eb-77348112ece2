@@ -23,15 +23,6 @@ class TradingStrategy(Strategy):
                data[-2][ticker]["close"] > \
                data[-3][ticker]["close"]
 
-    def has_negative_trend(self, ticker, data):
-        '''
-        check if the ticker provided has 3 days of closes consecutively 
-        above the previous days, this shows some sort of momentum
-        '''
-        return data[-1][ticker]["close"] < \
-               data[-2][ticker]["close"] < \
-               data[-3][ticker]["close"]
-
     def has_bottom_reversal(self, ticker, data):
         '''
         if the fast EMA crosses over the slow EMA
@@ -39,8 +30,7 @@ class TradingStrategy(Strategy):
         ema_fast = EMA(ticker, data, 7)
         ema_slow = SMA(ticker, data, 14)
         return (ema_fast[-1] > ema_slow[-1]) and \
-               (ema_fast[-2] < ema_slow[-2]) and \
-               (ema_fast[-3] < ema_slow[-3])
+               (ema_fast[-2] < ema_slow[-2])
 
     def has_top_reversal(self, ticker, data):
         '''
