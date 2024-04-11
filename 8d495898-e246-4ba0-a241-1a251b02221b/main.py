@@ -32,18 +32,6 @@ class TradingStrategy(Strategy):
         return (ema_fast[-1] < ema_slow[-1]) and \
                (ema_fast[-2] > ema_slow[-2]) 
 
-    def is_oversold(self, ticker, data):
-        rsi = RSI(ticker, data, 14)
-        return rsi[-1] <= 20
-
-    def is_overbought(self, ticker, data):
-        rsi = RSI(ticker, data, 14)
-        return rsi[-1] >= 80
-
-    def has_crossover(self, ticker, data):
-        rsi = RSI(ticker, data, 14)
-        return rsi[-1] >= 50 and rsi[-2] < 50
-
     def run(self, data):
         d = data["ohlcv"]
         allocation_dict = {}
