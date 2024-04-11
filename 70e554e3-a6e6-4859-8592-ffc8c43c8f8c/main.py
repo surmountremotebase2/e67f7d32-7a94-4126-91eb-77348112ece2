@@ -33,8 +33,8 @@ class TradingStrategy(Strategy):
                 allocation_dict = {i: 1}
 
             # entrace
-            # if (d[-1][i]['close'] > bb['mid'][-1]) and self.has_rising_rsi(i, d):
-            #     allocation_dict = {i: 1}
+            if (d[-1][i]['close'] > bb['mid'][-1]) and self.has_rising_rsi(i, d):
+                allocation_dict = {i: 1}
             
             # stop loss
             if (d[-1][i]['close'] < bb['lower'][-1]):
