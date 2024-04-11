@@ -33,13 +33,9 @@ class TradingStrategy(Strategy):
                (ema_fast[-2] > ema_slow[-2]) and \
                (ema_fast[-3] > ema_slow[-3])
 
-    def is_overbought(self, ticker, data):
+    def has_rsi_crossover(self, ticker, data):
         rsi = RSI(ticker, data, 7)
-        return rsi[-1] <= 30
-
-    def is_oversold(self, ticker, data):
-        rsi = RSI(ticker, data, 7)
-        return rsi[-1] >= 70    
+        return rsi[-1] > 50 and rsi[-2] <= 50
 
     def run(self, data):
         d = data["ohlcv"]
@@ -49,10 +45,10 @@ class TradingStrategy(Strategy):
         # how the allocation_dict logic works, this would need 
         # to be fixed to support multiple tickers truly
         for i in self.tickers:
-            if self.has_bottom_reversal(i, d) and self.is_overbought(i, d):
+            if self.has_bottom_reversal(i, d) and self.has_rsi_crossover(i, d):
                 allocation_dict = {i: 1}
 
-            if self.has_top_reversal(i, d) and self.is_oversold(i, d):
+            if self.has_top_reversal(i, d):
                 allocation_dict = {i: 0}
 
         return TargetAllocation(allocation_dict)
