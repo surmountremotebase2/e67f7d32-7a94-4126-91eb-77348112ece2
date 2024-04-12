@@ -30,7 +30,7 @@ class TradingStrategy(Strategy):
             # entrace
             # if (d[-1][i]['close'] > bb['mid'][-1]) and self.has_rising_rsi(i, d):
             #     allocation_dict = {i: 1}
-            if current_price_open < bb['mid'][-1] and current_price_close >= bb['mid'][-1]:
+            if current_price_open < bb['mid'][-1] and current_price_close >= bb['mid'][-1] and self.has_rising_rsi(i, d):
                 allocation_dict = {i: 1} 
             
             # vstop loss
