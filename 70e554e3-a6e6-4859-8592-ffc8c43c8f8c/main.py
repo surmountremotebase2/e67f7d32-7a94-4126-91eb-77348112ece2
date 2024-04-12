@@ -40,7 +40,7 @@ class TradingStrategy(Strategy):
                 allocation_dict = {i: 1} 
             
             # vstop loss
-            if (d[-1][i]['close'] < bb['lower'][-1]) or rsi[-1] < 50:
+            if (d[-1][i]['close'] < bb['lower'][-1]):
                 allocation_dict = {i: 0}
 
         return TargetAllocation(allocation_dict)
