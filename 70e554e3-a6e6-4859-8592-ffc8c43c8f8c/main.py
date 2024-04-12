@@ -16,7 +16,7 @@ class TradingStrategy(Strategy):
 
     def has_rising_rsi(self, ticker, data):
         rsi = RSI(ticker, data, 14)
-        return (rsi[-1] >= 50) and (rsi[-1] > rsi[-2])
+        return (rsi[-1] >= 50) and (rsi[-1] > rsi[-2] > rsi[-3])
 
     def run(self, data):
         d = data["ohlcv"]
