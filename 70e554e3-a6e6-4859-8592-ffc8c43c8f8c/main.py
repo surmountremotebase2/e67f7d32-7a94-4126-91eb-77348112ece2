@@ -28,15 +28,15 @@ class TradingStrategy(Strategy):
             current_price_close = d[-1][i]['close']
             
             # entrace
-            # if (d[-1][i]['close'] > bb['mid'][-1]) and self.has_rising_rsi(i, d):
-            #     allocation_dict = {i: 1}
             #
             # if the current price opened below middle bollinger band and closed above
             # middle bollinger band and also has rising RSI above 50, buy!
-            if current_price_open < bb['mid'][-1] and \
-               current_price_close >= bb['mid'][-1] and \
-               self.has_rising_rsi(i, d):
-                allocation_dict = {i: 1} 
+            if (d[-1][i]['close'] > bb['mid'][-1]) and self.has_rising_rsi(i, d):
+                allocation_dict = {i: 1}
+            # if current_price_open < bb['mid'][-1] and \
+            #    current_price_close >= bb['mid'][-1] and \
+            #    self.has_rising_rsi(i, d):
+            #     allocation_dict = {i: 1} 
             
             # vstop loss
             if (d[-1][i]['close'] < bb['lower'][-1]):
