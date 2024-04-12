@@ -32,7 +32,8 @@ class TradingStrategy(Strategy):
             #
             # if the current price opened below middle bollinger band and closed above
             # middle bollinger band and also has rising RSI above 50, buy!
-            if (d[-1][i]['close'] > bb['mid'][-1]) and self.has_rising_rsi(i, d):
+            if (d[-1][i]['close'] > bb['mid'][-1]) \
+              and self.has_rising_rsi(i, d):
                 allocation_dict = {i: 1}
             
             # vstop loss
