@@ -23,10 +23,15 @@ class TradingStrategy(Strategy):
         allocation_dict = {}
         for i in self.tickers:
             bb = BB(i, d, 14, 1)
+
+            current_price_open = d[-1][i]['open']
+            current_price_close = d[-1][i]['close']
             
             # entrace
-            if (d[-1][i]['close'] > bb['mid'][-1]) and self.has_rising_rsi(i, d):
-                allocation_dict = {i: 1}
+            # if (d[-1][i]['close'] > bb['mid'][-1]) and self.has_rising_rsi(i, d):
+            #     allocation_dict = {i: 1}
+            if current_price_open < bb['mid'][-1] and current_price_close >= bb['mid'][-1]:
+                allocation_dict = {i: 1} 
             
             # vstop loss
             if (d[-1][i]['close'] < bb['lower'][-1]):
