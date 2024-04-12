@@ -16,7 +16,7 @@ class TradingStrategy(Strategy):
 
     def has_rising_rsi(self, ticker, data):
         rsi = RSI(ticker, data, 14)
-        return (rsi[-1] >= 50) and (rsi[-1] > rsi[-2] > rsi[-3])
+        return (rsi[-1] >= 50) and (rsi[-1] > rsi[-2])
 
     def run(self, data):
         d = data["ohlcv"]
@@ -30,7 +30,12 @@ class TradingStrategy(Strategy):
             # entrace
             # if (d[-1][i]['close'] > bb['mid'][-1]) and self.has_rising_rsi(i, d):
             #     allocation_dict = {i: 1}
-            if current_price_open < bb['mid'][-1] and current_price_close >= bb['mid'][-1] and self.has_rising_rsi(i, d):
+            #
+            # if the current price opened below middle bollinger band and closed above
+            # middle bollinger band and also has rising RSI above 50, buy!
+            if current_price_open < bb['mid'][-1] and \
+               current_price_close >= bb['mid'][-1] and \
+               self.has_rising_rsi(i, d):
                 allocation_dict = {i: 1} 
             
             # vstop loss
