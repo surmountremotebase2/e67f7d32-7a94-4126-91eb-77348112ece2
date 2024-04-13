@@ -25,6 +25,9 @@ class TradingStrategy(Strategy):
     def run(self, data):
         d = data["ohlcv"]
         allocation_dict = {}
+
+        log(str(d))
+        
         for i in self.tickers:
             bb  = BB(i, d, 14, 1)
             rsi = RSI(i, d, 14)
