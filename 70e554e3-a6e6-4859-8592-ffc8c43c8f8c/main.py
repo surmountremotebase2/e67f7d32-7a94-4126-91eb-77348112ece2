@@ -18,6 +18,10 @@ class TradingStrategy(Strategy):
         rsi = RSI(ticker, data, 14)
         return (rsi[-1] >= 50) and (rsi[-1] > rsi[-2] > rsi[-3])
 
+    def has_falling_rsi(self, ticker, data):
+        rsi = RSI(ticker, data, 14)
+        return (rsi[-1] < rsi[-2] < rsi[-3])
+
     def run(self, data):
         d = data["ohlcv"]
         allocation_dict = {}
@@ -41,7 +45,7 @@ class TradingStrategy(Strategy):
             # exit
             #
             # exit position when it closes below the lower bollinger band
-            if (current_price_close < bb['lower'][-1]):
+            if (current_price_close < bb['lower'][-1]) or has_falling_rsi(i, d):
                 allocation_dict = {i: 0}
 
         return TargetAllocation(allocation_dict)
