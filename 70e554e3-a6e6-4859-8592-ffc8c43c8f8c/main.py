@@ -36,7 +36,9 @@ class TradingStrategy(Strategy):
               and self.has_rising_rsi(i, d):
                 allocation_dict = {i: 1}
             
-            # vstop loss
+            # exit
+            #
+            # exit position when it closes below the lower bollinger band
             if (current_price_close < bb['lower'][-1]):
                 allocation_dict = {i: 0}
 
