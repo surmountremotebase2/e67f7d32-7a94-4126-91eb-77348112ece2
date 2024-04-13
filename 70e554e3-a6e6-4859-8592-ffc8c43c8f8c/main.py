@@ -45,7 +45,7 @@ class TradingStrategy(Strategy):
             # exit
             #
             # exit position when it closes below the lower bollinger band
-            if (current_price_close < bb['lower'][-1]) or has_falling_rsi(i, d):
+            if (current_price_close < bb['lower'][-1]) or self.has_falling_rsi(i, d):
                 allocation_dict = {i: 0}
 
         return TargetAllocation(allocation_dict)
