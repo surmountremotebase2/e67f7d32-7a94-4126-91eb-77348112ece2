@@ -36,8 +36,7 @@ class TradingStrategy(Strategy):
             #   and self.has_rising_rsi(i, d):
             #     allocation_dict = {i: 1}
             if (current_price_open < bb['mid'][-1]) and \
-               (current_price_close > bb['mid'][-1]) and \
-               self.has_rising_rsi(i, d):
+               (current_price_close > bb['mid'][-1]):
                 allocation_dict = {i: 1}
             
             # exit
