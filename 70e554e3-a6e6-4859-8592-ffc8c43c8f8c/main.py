@@ -14,6 +14,12 @@ class TradingStrategy(Strategy):
     def interval(self):
         return "1day"
 
+    def has_resistance(self, ticker, data):
+        bb = BB(i, d, 14, 1)
+        return bb['mid'][-1] > data[-1][ticker]['open'] and \
+               bb['mid'][-1] > data[-1][ticker]['close'] and \
+               bb['mid'][-1] < data[-1][ticker]['high']
+
     def has_rising_volume(self, ticker, data):
         return data[-1][ticker]['volume'] > data[-2][ticker]['volume'] > data[-3][ticker]['volume']
 
