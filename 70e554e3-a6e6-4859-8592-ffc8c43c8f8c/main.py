@@ -14,6 +14,12 @@ class TradingStrategy(Strategy):
     def interval(self):
         return "1day"
 
+    def has_rising_volume(self, ticker, data):
+        return data[-1][ticker]['volume'] > data[-2][ticker]['volume'] > data[-3][ticker]['volume']
+
+    def has_falling_volume(self, ticker, data):
+        return data[-1][ticker]['volume'] < data[-2][ticker]['volume'] < data[-3][ticker]['volume']
+
     def has_rising_rsi(self, ticker, data):
         rsi = RSI(ticker, data, 14)
         return (rsi[-1] >= 50) and (rsi[-1] > rsi[-2] > rsi[-3])
@@ -32,6 +38,8 @@ class TradingStrategy(Strategy):
             bb  = BB(i, d, 14, 1)
             rsi = RSI(i, d, 14)
 
+            current_price_low   = d[-1][i]['low']
+            current_price_high  = d[-1][i]['high']
             current_price_open  = d[-1][i]['open']
             current_price_close = d[-1][i]['close']
             
