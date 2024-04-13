@@ -53,13 +53,13 @@ class TradingStrategy(Strategy):
             # if (current_price_close > bb['mid'][-1]) \
             #   and self.has_rising_rsi(i, d):
             #     allocation_dict = {i: 1}
-            if (current_price_close > bb['mid'][-1]) and rsi[-1] >= 50 and self.has_rising_volume(i, d):
+            if (current_price_close > bb['mid'][-1]) and rsi[-1] >= 50:
                 allocation_dict = {i: 1}
             
             # exit
             #
             # exit position when it closes below the lower bollinger band
-            if (current_price_close < bb['lower'][-1]):
+            if (current_price_close < bb['mid'][-1]) and self.has_falling_volume((i, d)):
                 allocation_dict = {i: 0}
 
         return TargetAllocation(allocation_dict)
