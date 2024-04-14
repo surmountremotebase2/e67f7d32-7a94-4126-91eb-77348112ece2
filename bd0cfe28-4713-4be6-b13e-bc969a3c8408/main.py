@@ -20,19 +20,17 @@ class TradingStrategy(Strategy):
         allocation_dict = {} 
 
         for i in self.tickers:
-            # if len(data)<20:
-            #     return TargetAllocation({})
-            
+
             bb  = BB(i, d, 20, 1.4)
             rsi = RSI(i, d, 2)
             current_price_close = d[-1][i]['close']
 
             if (current_price_close >= bb['mid'][-1]) and rsi[-1] >= 50:
-                #if h[i] >= 0:
                 log("buy")
-                allocation_dict = {i: min(1, h[i]+0.1)}
-                # else:
-                #     allocation_dict = {i: 0.25}
+                if h[i]:
+                    allocation_dict = {i: min(1, h[i]+0.1)}
+                else:
+                    allocation_dict = {i: 0.1}
             elif (current_price_close > bb['upper'][-1]):
                 log("sell")
                 if h[i] > 0:
