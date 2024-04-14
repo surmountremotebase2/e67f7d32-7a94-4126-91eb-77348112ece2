@@ -14,13 +14,11 @@ class TradingStrategy(Strategy):
     def interval(self):
         return "1day"
 
-    # def has_falling_volume(self, ticker, data):
-    #     return data[-1][ticker]['volume'] < data[-2][ticker]['volume'] < data[-3][ticker]['volume']
-
     def run(self, data):
         d = data["ohlcv"]
         h = data["holdings"]
         allocation_dict = {} 
+
         for i in self.tickers:
             if len(data)<20:
                 return TargetAllocation({})
