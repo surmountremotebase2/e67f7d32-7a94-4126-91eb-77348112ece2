@@ -39,7 +39,8 @@ class TradingStrategy(Strategy):
             #     allocation_dict = {i: 0}
             # exit position, exit if closes below the lower bollinger band and has falling
             # volume, this attempts to exit the position incrementally but in 20% increments
-            elif (current_price_close <= bb['lower'][-1]) and self.has_falling_volume(i, d):
+            #elif (current_price_close <= bb['lower'][-1]) and self.has_falling_volume(i, d):
+            elif self.has_falling_volume(i, d):
                 if i in h:
                     if h[i] >= 0.1:
                         allocation_dict = {i: min(0, h[i] - 0.1)}
