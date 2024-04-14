@@ -14,6 +14,9 @@ class TradingStrategy(Strategy):
     def interval(self):
         return "1day"
 
+    def has_falling_volume(self, ticker, data):
+        return data[-1][ticker]['volume'] < data[-2][ticker]['volume'] < data[-3][ticker]['volume']
+
     def run(self, data):
         d = data["ohlcv"]
         h = data["holdings"]
@@ -28,7 +31,7 @@ class TradingStrategy(Strategy):
                     allocation_dict = {i: min(1, h[i]+0.1)}
                 else:
                     allocation_dict = {i: 0.1}
-            elif (current_price_close <= bb['lower'][-1]): #(current_price_close >= bb['upper'][-1]) or 
+            elif (current_price_close <= bb['lower'][-1]) and self.has_falling_volume(i, d):
                 if i in h:
                     if h[i] >= 0.2:
                         allocation_dict = {i: min(0, h[i] - 0.2)}
