@@ -22,8 +22,8 @@ class TradingStrategy(Strategy):
         h = data["holdings"]
         allocation_dict = {} 
         for i in self.tickers:
-            bb  = BB(i, d, 20, 1.4)
-            rsi = RSI(i, d, 2)
+            bb  = BB(i, d, 14, 1.4)
+            rsi = RSI(i, d, 5)
             current_price_close = d[-1][i]['close']
             # enter a position if the price closes above the middle of the 
             # bollinger band and has an RSI of 50 or greater. add the position
