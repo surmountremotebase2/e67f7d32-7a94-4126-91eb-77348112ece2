@@ -31,19 +31,12 @@ class TradingStrategy(Strategy):
                     allocation_dict = {i: min(1, h[i]+0.1)}
                 else:
                     allocation_dict = {i: 0.1}
-            elif (current_price_close > bb['upper'][-1]):
+            elif (current_price_close >= bb['upper'][-1]):
                 log("sell")
-                if h[i] > 0:
-                    allocation_dict = {i: min(1, h[i]-0.1)}
                 if i in h:
                     if h[i] > 0:
                         allocation_dict = {i: min(1, h[i]-0.1)}
-                    else:
-                        allocation_dict = {i: 0}
-                else:
-                    allocation_dict = {i: 0}
             else:
                 log("empty")
-                allocation_dict = {i: 0}
 
         return TargetAllocation(allocation_dict)
