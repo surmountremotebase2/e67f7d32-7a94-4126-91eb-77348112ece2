@@ -21,7 +21,7 @@ class TradingStrategy(Strategy):
         d = data["ohlcv"]
         allocation_dict = {} 
         for i in self.tickers:
-            bb  = BB(i, d, 14, 1)
+            bb  = BB(i, d, 14, 1.4)
             rsi = RSI(i, d, 14)
             current_price_close = d[-1][i]['close']
             
