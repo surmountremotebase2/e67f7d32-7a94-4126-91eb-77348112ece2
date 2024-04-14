@@ -20,8 +20,8 @@ class TradingStrategy(Strategy):
         allocation_dict = {} 
 
         for i in self.tickers:
-            if len(data)<20:
-                return TargetAllocation({})
+            # if len(data)<20:
+            #     return TargetAllocation({})
             
             bb  = BB(i, d, 20, 1.4)
             rsi = RSI(i, d, 2)
