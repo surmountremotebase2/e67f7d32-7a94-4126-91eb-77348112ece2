@@ -37,5 +37,4 @@ class TradingStrategy(Strategy):
             # else:
             #     log("empty")
 
-        log(str(allocation_dict))
         return TargetAllocation(allocation_dict)
