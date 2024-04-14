@@ -29,16 +29,18 @@ class TradingStrategy(Strategy):
 
             if (current_price_close >= bb['mid'][-1]) and rsi[-1] >= 50:
                 #if h[i] >= 0:
-                log(str(h[i]+0.1))
+                log("buy")
                 allocation_dict = {i: min(0.1, h[i]+0.1)}
                 # else:
                 #     allocation_dict = {i: 0.25}
             elif (current_price_close > bb['upper'][-1]):
+                log("sell")
                 if h[i] > 0:
                     allocation_dict = {i: min(0.1, h[i]-0.1)}
                 else:
                     allocation_dict = {i: 0}
             else:
+                log("empty")
                 allocation_dict = {i: 0}
 
         return TargetAllocation(allocation_dict)
