@@ -35,8 +35,8 @@ class TradingStrategy(Strategy):
                     allocation_dict = {i: 0.1}
             # take profits, sell all if closes above upper bollinger band and has 
             # an RSI of 70 or greater
-            elif (current_price_close >= bb['upper'][-1]) and rsi[-1] >= 70:
-                allocation_dict = {i: 0}
+            # elif (current_price_close >= bb['upper'][-1]) and rsi[-1] >= 70:
+            #     allocation_dict = {i: 0}
             # exit position, exit if closes below the lower bollinger band and has falling
             # volume, this attempts to exit the position incrementally but in 20% increments
             elif (current_price_close <= bb['lower'][-1]) and self.has_falling_volume(i, d):
