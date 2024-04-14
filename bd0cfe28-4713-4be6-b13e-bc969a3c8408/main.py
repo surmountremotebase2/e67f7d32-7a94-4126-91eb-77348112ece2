@@ -25,8 +25,10 @@ class TradingStrategy(Strategy):
 
             if (current_price_close >= bb['mid'][-1]) and rsi[-1] >= 50:
                 if i in h:
+                    log("BUY ", str(min(1, h[i]+0.1)))
                     allocation_dict = {i: min(1, h[i]+0.1)}
                 else:
+                    log("BUY 10%")
                     allocation_dict = {i: 0.1}
             elif (current_price_close >= bb['upper'][-1]) or (current_price_close <= bb['lower'][-1]):
                 if i in h:
