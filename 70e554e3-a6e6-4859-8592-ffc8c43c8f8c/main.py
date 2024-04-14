@@ -22,7 +22,7 @@ class TradingStrategy(Strategy):
         allocation_dict = {} 
         for i in self.tickers:
             bb  = BB(i, d, 20, 1.4)
-            rsi = RSI(i, d, 14)
+            rsi = RSI(i, d, 5)
             current_price_close = d[-1][i]['close']
             
             # entrace
