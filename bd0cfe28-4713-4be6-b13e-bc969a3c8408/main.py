@@ -19,6 +19,8 @@ class TradingStrategy(Strategy):
         h = data["holdings"]
         allocation_dict = {} 
 
+        log(str(h))
+
         for i in self.tickers:
             bb  = BB(i, d, 20, 1.4)
             rsi = RSI(i, d, 2)
