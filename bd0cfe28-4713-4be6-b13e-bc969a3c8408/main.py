@@ -27,14 +27,14 @@ class TradingStrategy(Strategy):
             rsi = RSI(i, d, 2)
             current_price_close = d[-1][i]['close']
 
-            if (current_price_close > bb['mid'][-1]) and rsi[-1] >= 50:
+            if (current_price_close >= bb['mid'][-1]) and rsi[-1] >= 50:
                 if h[i] >= 0:
-                    allocation_dict = {i: min(1, h[i]+0.1)}
+                    allocation_dict = {i: min(0.1, h[i]+0.1)}
                 else:
                     allocation_dict = {i: 0.25}
             elif (current_price_close > bb['upper'][-1]):
                 if h[i] > 0:
-                    allocation_dict = {i: min(1, h[i]-0.1)}
+                    allocation_dict = {i: min(0.1, h[i]-0.1)}
                 else:
                     allocation_dict = {i: 0}
             else:
