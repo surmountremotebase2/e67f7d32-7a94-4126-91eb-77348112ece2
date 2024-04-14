@@ -27,12 +27,12 @@ class TradingStrategy(Strategy):
             current_price_close = d[-1][i]['close']
             
             if (current_price_close > bb['mid'][-1]) and rsi[-1] >= 50:
-                if holdings[i] >= 0:
+                if h[i] >= 0:
                     allocation_dict = {i: min(1, h[i]+0.1)}
                 else:
                     allocation_dict = {i: 0.4}
             elif (current_price_close > bb['upper'][-1]):
-                if holdings[i] > 0:
+                if h[i] > 0:
                     allocation_dict = {i: min(1, h[i]-0.1)}
                 else:
                     allocation_dict = {i: 0}
