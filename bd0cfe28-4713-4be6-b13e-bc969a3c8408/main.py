@@ -25,7 +25,6 @@ class TradingStrategy(Strategy):
             bb  = BB(i, d, 20, 1.4)
             rsi = RSI(i, d, 2)
             current_price_close = d[-1][i]['close']
-
             # enter a position if the price closes above the middle of the 
             # bollinger band and has an RSI of 50 or greater. add the position
             # incrementally.
