@@ -12,7 +12,7 @@ class TradingStrategy(Strategy):
 
     @property
     def interval(self):
-        return "1day"
+        return "1hour"
 
     def has_falling_volume(self, ticker, data):
         return data[-1][ticker]['volume'] < data[-2][ticker]['volume'] < data[-3][ticker]['volume']
