@@ -26,11 +26,20 @@ class TradingStrategy(Strategy):
             rsi = RSI(i, d, 2)
             current_price_close = d[-1][i]['close']
 
+            # enter a position if the price closes above the middle of the 
+            # bollinger band and has an RSI of 50 or greater. add the position
+            # incrementally.
             if (current_price_close >= bb['mid'][-1]) and rsi[-1] >= 50:
                 if i in h:
                     allocation_dict = {i: min(1, h[i]+0.1)}
                 else:
                     allocation_dict = {i: 0.1}
+            # take profits, sell all if closes above upper bollinger band and has 
+            # an RSI of 70 or greater
+            elif (current_price_close >= bb['upper'][-1]) and has rsi[-1] >= 70:
+                allocation_dict = {i: 0}
+            # exit position, exit if closes below the lower bollinger band and has falling
+            # volume, this attempts to exit the position incrementally but in 20% increments
             elif (current_price_close <= bb['lower'][-1]) and self.has_falling_volume(i, d):
                 if i in h:
                     if h[i] >= 0.2:
