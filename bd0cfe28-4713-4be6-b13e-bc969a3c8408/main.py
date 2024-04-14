@@ -22,7 +22,7 @@ class TradingStrategy(Strategy):
         h = data["holdings"]
         allocation_dict = {} 
         for i in self.tickers:
-            bb  = BB(i, d, 14, 2)
+            bb  = BB(i, d, 14, 1.3)
             rsi = RSI(i, d, 5)
             current_price_close = d[-1][i]['close']
             # enter a position if the price closes above the middle of the 
