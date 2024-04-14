@@ -35,6 +35,11 @@ class TradingStrategy(Strategy):
                 log("sell")
                 if h[i] > 0:
                     allocation_dict = {i: min(1, h[i]-0.1)}
+                if i in h:
+                    if h[i] > 0:
+                        allocation_dict = {i: min(1, h[i]-0.1)}
+                    else:
+                        allocation_dict = {i: 0}
                 else:
                     allocation_dict = {i: 0}
             else:
