@@ -33,6 +33,6 @@ class TradingStrategy(Strategy):
                     if h[i] > 0:
                         allocation_dict = {i: min(0, h[i]-0.2)}
             else:
-                #log("empty")
+                log("empty")
 
         return TargetAllocation(allocation_dict)
