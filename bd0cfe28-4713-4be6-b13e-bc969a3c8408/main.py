@@ -30,8 +30,10 @@ class TradingStrategy(Strategy):
                     allocation_dict = {i: 0.1}
             elif (current_price_close >= bb['upper'][-1]) or (current_price_close <= bb['lower'][-1]):
                 if i in h:
-                    if h[i] >= 0:
+                    if h[i] >= 0.2:
                         allocation_dict = {i: min(0, h[i]-0.2)}
+                    else:
+                        allocation_dict = {i: 0}
             # else:
             #     log("empty")
 
