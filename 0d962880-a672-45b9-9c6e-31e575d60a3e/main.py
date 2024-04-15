@@ -24,28 +24,32 @@ class TradingStrategy(Strategy):
         for i in self.tickers:
             bb  = BB(i, d, 14, 1.3)
             rsi = RSI(i, d, 5)
+            macd = MACD(i, d, 12, 26)
             current_price_close = d[-1][i]['close']
+
+            log(str(macd))
+
             # enter a position if the price closes above the middle of the 
             # bollinger band and has an RSI of 50 or greater. add the position
             # incrementally.
-            if (current_price_close >= bb['mid'][-1]) and rsi[-1] >= 50:
-                if i in h:
-                    allocation_dict = {i: min(1, h[i]+0.1)}
-                else:
-                    allocation_dict = {i: 0.1}
+            # if (current_price_close >= bb['mid'][-1]) and rsi[-1] >= 50:
+            #     if i in h:
+            #         allocation_dict = {i: min(1, h[i]+0.1)}
+            #     else:
+            #         allocation_dict = {i: 0.1}
             # take profits, sell all if closes above upper bollinger band and has 
             # an RSI of 70 or greater
             # elif (current_price_close >= bb['upper'][-1]) and rsi[-1] >= 70:
             #     allocation_dict = {i: 0}
             # exit position, exit if closes below the lower bollinger band and has falling
             # volume, this attempts to exit the position incrementally but in 20% increments
-            elif (current_price_close <= bb['lower'][-1]) and self.has_falling_volume(i, d):
-                if i in h:
-                    if h[i] >= 0.1:
-                        allocation_dict = {i: min(0, h[i] - 0.1)}
-                    else:
-                        allocation_dict = {i: 0}
-            else:
-                allocation_dict = h
+            # elif (current_price_close <= bb['lower'][-1]) and self.has_falling_volume(i, d):
+            #     if i in h:
+            #         if h[i] >= 0.1:
+            #             allocation_dict = {i: min(0, h[i] - 0.1)}
+            #         else:
+            #             allocation_dict = {i: 0}
+            # else:
+            #     allocation_dict = h
 
         return TargetAllocation(allocation_dict)
