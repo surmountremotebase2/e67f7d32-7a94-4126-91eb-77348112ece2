@@ -14,7 +14,7 @@ class TradingStrategy(Strategy):
 
     @property
     def interval(self):
-        return "1hour"
+        return "4hour"
 
     def SMAVol(self, ticker, data, length):
         '''Calculate the moving average of trading volume
