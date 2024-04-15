@@ -39,8 +39,8 @@ class TradingStrategy(Strategy):
             current_price_open  = d[-1][i]['open']
             current_price_close = d[-1][i]['close']
 
-            vol_sma_fast = SMAVol(i, d, 5)
-            vol_sma_slow = SMAVol(i, d, 12)
+            vol_sma_fast = self.SMAVol(i, d, 5)
+            vol_sma_slow = self.SMAVol(i, d, 12)
 
             if current_price_close > vol_sma_fast[-1] > vol_sma_slow[-1]:
                 allocation_dict = {i: 1}
