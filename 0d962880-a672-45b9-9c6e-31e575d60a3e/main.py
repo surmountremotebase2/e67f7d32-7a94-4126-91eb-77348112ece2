@@ -27,7 +27,7 @@ class TradingStrategy(Strategy):
             macd = MACD(i, d, 12, 26)
             current_price_close = d[-1][i]['close']
 
-            log(str(macd))
+            log(str(macd[-1]))
 
             # enter a position if the price closes above the middle of the 
             # bollinger band and has an RSI of 50 or greater. add the position
