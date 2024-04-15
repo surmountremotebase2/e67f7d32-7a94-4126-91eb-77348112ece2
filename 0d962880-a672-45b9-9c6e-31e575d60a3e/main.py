@@ -16,7 +16,7 @@ class TradingStrategy(Strategy):
     def interval(self):
         return "1day"
 
-    def SMAVol(ticker, data, length):
+    def SMAVol(self, ticker, data, length):
         '''Calculate the moving average of trading volume
 
         :param ticker: a string ticker
