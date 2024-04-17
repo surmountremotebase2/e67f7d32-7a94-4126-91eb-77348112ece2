@@ -30,7 +30,7 @@ class TradingStrategy(Strategy):
             if mfi[-1] >= 80:
                 allocation_dict = {i: 0}
 
-            if mfi[-1] < mfi[-2] < mfi[-3]:
+            if (mfi[-1] > 50) and (mfi[-1] < mfi[-2] < mfi[-3]):
                 allocation_dict = {i: 0}
 
 
