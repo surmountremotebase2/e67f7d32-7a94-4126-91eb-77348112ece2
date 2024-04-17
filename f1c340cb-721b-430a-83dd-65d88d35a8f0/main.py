@@ -27,7 +27,6 @@ class TradingStrategy(Strategy):
             sma   = SMA(i, d, 20)
 
             if (pclose > sma[-1]) and \
-               (popen < sma[-1]) and \
                (mfi[-1] > 40 and mfi[-2] <= 40):
                 allocation_dict = {i: 1}
 
