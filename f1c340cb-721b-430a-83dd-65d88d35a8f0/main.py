@@ -23,6 +23,6 @@ class TradingStrategy(Strategy):
         for i in self.tickers:
             close = d[-1][i]['close']
             macd  = MACD(i, d, 12, 26)
-            log(str(macd))
+            log(str(macd[-1]))
 
         return TargetAllocation(allocation_dict)
