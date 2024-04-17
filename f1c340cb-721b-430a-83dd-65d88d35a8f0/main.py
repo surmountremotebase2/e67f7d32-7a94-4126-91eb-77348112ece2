@@ -29,7 +29,7 @@ class TradingStrategy(Strategy):
                 allocation_dict = {i: 1}
 
             # MFI opposite direction of price action, signal a reversal, buy!
-            if (d[-1][i]['close'] < d[-2][i]['close']) and (mfi[-1] > mfi[-2] > mfi[-3]):
+            if (d[-1][i]['close'] < d[-2][i]['close'] < d[-3][i]['close']) and (mfi[-1] > mfi[-2] > mfi[-3]):
                 allocation_dict = {i: 1}
 
             # MFI is overbought, sell
