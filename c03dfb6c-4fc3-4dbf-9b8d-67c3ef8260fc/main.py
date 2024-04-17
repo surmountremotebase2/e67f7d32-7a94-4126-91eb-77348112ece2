@@ -6,7 +6,7 @@ import pandas as pd
 
 class TradingStrategy(Strategy):
     def __init__(self):
-        self.tickers = ["SOXX"]
+        self.tickers = ["SPY"]
 
     @property
     def assets(self):
