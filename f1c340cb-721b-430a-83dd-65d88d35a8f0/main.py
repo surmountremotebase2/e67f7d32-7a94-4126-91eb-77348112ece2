@@ -24,19 +24,17 @@ class TradingStrategy(Strategy):
             close = d[-1][i]['close']
             mfi  = MFI(i, d, 5)
             
-            # MFI shows buying pressure on the security
+            # MFI shows buying pressure on the security, buy!
             if mfi[-1] > 50 and mfi[-2] <= 50:
                 allocation_dict = {i: 1}
 
-            # MFI opposite direction of price action, signal a reversal
+            # MFI opposite direction of price action, signal a reversal, buy!
             if (d[-1][i]['close'] < d[-2][i]['close']) and (mfi[-1] > mfi[-2] > mfi[-3]):
                 allocation_dict = {i: 1}
 
-            # MFI is overbought
+            # MFI is overbought, sell
             if mfi[-1] >= 80:
                 allocation_dict = {i: 0}
-
-
 
 
         return TargetAllocation(allocation_dict)
