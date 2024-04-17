@@ -42,10 +42,10 @@ class TradingStrategy(Strategy):
             vol_sma_fast = self.SMAVol(i, d, 5)
             vol_sma_slow = self.SMAVol(i, d, 12)
 
-            if (vol_sma_fast[-1] > vol_sma_slow[-1]) and rsi >= 50:
+            if (vol_sma_fast[-1] > vol_sma_slow[-1]) and rsi[-1] >= 50:
                 allocation_dict = {i: 1}
 
-            if (vol_sma_fast[-1] < vol_sma_slow[-1]) and rsi <= 50:
+            if (vol_sma_fast[-1] < vol_sma_slow[-1]) and rsi[-1] <= 50:
                 allocation_dict = {i: 0}
 
         return TargetAllocation(allocation_dict)
