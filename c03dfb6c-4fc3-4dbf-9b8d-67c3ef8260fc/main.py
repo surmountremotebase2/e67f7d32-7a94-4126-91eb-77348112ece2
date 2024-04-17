@@ -16,21 +16,6 @@ class TradingStrategy(Strategy):
     def interval(self):
         return "1hour"
 
-    def SMAVol(self, ticker, data, length):
-        '''Calculate the moving average of trading volume
-
-        :param ticker: a string ticker
-        :param data: data as provided from the OHLCV data function
-        :param length: the window
-
-        :return: list with float SMA
-        '''
-        close = [i[ticker]["volume"] for i in data]
-        d = ta.sma(pd.Series(close), length=length)
-        if d is None:
-            return None
-        return d.tolist()
-
     def run(self, data):
         d = data["ohlcv"]
         h = data["holdings"]
@@ -39,13 +24,10 @@ class TradingStrategy(Strategy):
             current_price_open  = d[-1][i]['open']
             current_price_close = d[-1][i]['close']
             rsi = RSI(i, d, 14)
-            vol_sma_fast = self.SMAVol(i, d, 5)
-            vol_sma_slow = self.SMAVol(i, d, 12)
 
-            if (vol_sma_fast[-1] > vol_sma_slow[-1]) and rsi[-1] >= 50:
+            if rsi[-1] >= 50:
                 allocation_dict = {i: 1}
 
-            #if (vol_sma_fast[-1] < vol_sma_slow[-1]):
             if rsi[-1] < 50:
                 allocation_dict = {i: 0}
 
