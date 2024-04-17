@@ -24,7 +24,7 @@ class TradingStrategy(Strategy):
             close = d[-1][i]['close']
             mfi  = MFI(i, d, 5)
 
-            if mfi[-1] <= 20:
+            if mfi[-1] > 50 and mfi[-2] <= 50:
                 allocation_dict = {i: 1}
 
             if mfi[-1] >= 80:
