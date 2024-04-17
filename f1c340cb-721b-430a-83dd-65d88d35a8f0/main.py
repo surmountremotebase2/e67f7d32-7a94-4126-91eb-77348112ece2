@@ -42,8 +42,8 @@ class TradingStrategy(Strategy):
             #     allocation_dict = {i: 1}
 
             # # MFI is overbought, sell
-            # if mfi[-1] >= 80:
-            #     allocation_dict = {i: 0}
+            if mfi[-1] >= 80:
+                allocation_dict = {i: 0}
 
 
         return TargetAllocation(allocation_dict)
