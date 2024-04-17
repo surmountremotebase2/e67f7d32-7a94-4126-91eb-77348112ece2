@@ -22,7 +22,13 @@ class TradingStrategy(Strategy):
         allocation_dict = {} 
         for i in self.tickers:
             close = d[-1][i]['close']
-            macd  = MACD(i, d, 12, 26)
-            log(str(macd))
+            mfi  = MFI(i, d, 5)
+
+            if mfi[-1] <= 20:
+                allocation_dict = {i: 1}
+
+            if mfi[-1] >= 80:
+                allocation_dict = {i: 0}
+
 
         return TargetAllocation(allocation_dict)
