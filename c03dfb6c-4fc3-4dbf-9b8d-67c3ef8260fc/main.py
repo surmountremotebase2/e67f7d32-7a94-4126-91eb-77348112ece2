@@ -21,11 +21,9 @@ class TradingStrategy(Strategy):
         h = data["holdings"]
         allocation_dict = {} 
         for i in self.tickers:
-            current_price_open  = d[-1][i]['open']
-            current_price_close = d[-1][i]['close']
             rsi = RSI(i, d, 14)
 
-            if rsi[-1] >= 50:
+            if rsi[-1] >= 50 and rsi[-2] < 50:
                 allocation_dict = {i: 1}
 
             if rsi[-1] < 50:
