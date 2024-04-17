@@ -21,20 +21,30 @@ class TradingStrategy(Strategy):
         h = data["holdings"]
         allocation_dict = {} 
         for i in self.tickers:
-            close = d[-1][i]['close']
-            mfi  = MFI(i, d, 5)
-            
-            # MFI shows buying pressure on the security, buy!
-            if mfi[-1] > 50 and mfi[-2] <= 50:
+            pclose = d[-1][i]['close']
+            popen = d[-1][i]['open']
+            mfi   = MFI(i, d, 5)
+            sma   = SMA(i, d, 20)
+
+            if (pclose > sma[-1]) and \
+               (popen < sma[-1]) and \
+               (mfi[-1] > 40 and mfi[-2] <= 40):
                 allocation_dict = {i: 1}
 
-            # MFI opposite direction of price action, signal a reversal, buy!
-            if (d[-1][i]['close'] < d[-2][i]['close'] < d[-3][i]['close']) and (mfi[-1] > mfi[-2] > mfi[-3]):
-                allocation_dict = {i: 1}
-
-            # MFI is overbought, sell
-            if mfi[-1] >= 80:
+            if (pclose < sma[-1]) and (mfi[-1] < 60):
                 allocation_dict = {i: 0}
+            
+            # # MFI shows buying pressure on the security, buy!
+            # if mfi[-1] > 50 and mfi[-2] <= 50:
+            #     allocation_dict = {i: 1}
+
+            # # MFI opposite direction of price action, signal a reversal, buy!
+            # if (d[-1][i]['close'] < d[-2][i]['close'] < d[-3][i]['close']) and (mfi[-1] > mfi[-2] > mfi[-3]):
+            #     allocation_dict = {i: 1}
+
+            # # MFI is overbought, sell
+            # if mfi[-1] >= 80:
+            #     allocation_dict = {i: 0}
 
 
         return TargetAllocation(allocation_dict)
